@@ -1,22 +1,26 @@
 package com.jockey.IteratorPattern;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class WaitressJavaUtil {
-	Menu pancakeHouseMenu;
-	Menu dinerMenu;
-
-	public WaitressJavaUtil(Menu pancakeHouseMenu, Menu dinerMenu) {
+	ArrayList<Menu> menus;
+	
+	public WaitressJavaUtil(ArrayList<Menu> menus) {
 		super();
-		this.pancakeHouseMenu = pancakeHouseMenu;
-		this.dinerMenu = dinerMenu;
+		this.menus = menus;
 	}
-
+	
 	public void printMenu() {
-		java.util.Iterator pancakeHouseMenuIterator = pancakeHouseMenu.createJavaUtilIterator();
-		java.util.Iterator dinerHouseMenuIterator = dinerMenu.createJavaUtilIterator();
-		System.out.println("MENU\n----\nBREAKFAST");
-		printMenu(pancakeHouseMenuIterator);
-		System.out.println("\nLUNCH");
-		printMenu(dinerHouseMenuIterator);
+		for (Menu menu : menus) {
+			
+			if (menu instanceof DinerMenu) {
+				printMenu(((DinerMenu) menu).createAlternatingIterator());
+			}else {
+				printMenu(menu.createJavaUtilIterator());
+			}
+			System.out.println();
+		}
 	}
 	
 	private void printMenu(java.util.Iterator iterator) {
@@ -27,6 +31,5 @@ public class WaitressJavaUtil {
 			System.out.println(item.getDescription());
 		}
 	}
-	
 
 }

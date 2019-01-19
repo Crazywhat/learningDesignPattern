@@ -40,4 +40,7 @@ public class DinerMenu implements Menu {
 		return new DinerMenuIteratorJavaUtil(menuItems, numberOfItems);
 	}
 	
+	public java.util.Iterator createAlternatingIterator(){
+		return new AlternatingDinerMenuIterator(menuItems, numberOfItems);
+	}
 }
